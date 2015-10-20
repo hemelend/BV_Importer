@@ -4,5 +4,4 @@ class ImportedFile < ActiveRecord::Base
 
   mount_uploader :name, ImpFileNameUploader
 
-  validates_uniqueness_of :name
 end
