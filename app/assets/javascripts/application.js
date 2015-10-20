@@ -30,13 +30,13 @@ $(document).scroll(function() {
     if( $(this).scrollTop() > 50 ) {
         if(transparent) {
             transparent = false;
-            $('.navbar-fixed-top').removeClass('navbar-prespectec');
+            $('.navbar-fixed-top').removeClass('navbar-bv');
             $('.navbar-fixed-top').addClass('navbar-inverse');
         }
     } else {
         if( !transparent ) {
             transparent = true;
-            $('.navbar-fixed-top').addClass('navbar-prespectec');
+            $('.navbar-fixed-top').addClass('navbar-bv');
             $('.navbar-fixed-top').removeClass('navbar-inverse');
         }
     }
