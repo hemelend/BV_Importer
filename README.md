@@ -110,10 +110,29 @@ $ bundle exec rake db:setup
 ```
 
 # Challenges, and how you overcame them
+- Challenge: Read a compressed file witout save it in disk in order to improve the performance
+  Solution: open the file and read the content into memory then create the csv object to upload the data
+- Challenge: Create a batch/bulk upload for mass records
+  Soluction: create an array with simple SQL command with all records then read the array in chunks of 1000 records and run
+             the SQL Command to upload the data
 
 # Reasoning behind any design decisions
+- Used a free sample compressed csv file with 36k records, the file is about weather data so I mapped the file columns with database fields
+  the fields are mapped as follow:
+  * Campaign_name = policyID
+  * impressions = concatenation of county, construction, line columns
+  * clicks = point_granularity
+  * cost = eq_site_limit
+- The sample file is located in the root, and is called 'FL_insurance_sample.csv.zip'
+- There are 3 tables called
+  * Users: used to store user credentials, has many imported_files
+  * Imported_files: used to store the file information, belongs to users and has many marketing_stats
+  * Marketing_stats: used to store file data, belongs to imported_files
+- The File is store into the application public folder
 
 # Future improvements you would make with more time
+- Right now it is using a minimalistic design; so, I would invest more time improving the look & feel
+- For very big files (Millions of records), i would use a multi-thread process in order to improve the upload performance
 
 [RubyOnRails]:http://rubyonrails.org
 [jQuery]:http://jquery.com
