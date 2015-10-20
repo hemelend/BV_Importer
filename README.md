@@ -42,7 +42,7 @@ $ brew install ruby-build
 ```
 ##Configurate working directory
 
-### Global git ignore
+## Global git ignore
 ```sh
 $ git config --global core.excludesfile ~/.gitignore
 $ printf "vendor/bundle\n.DS_Store\n" >> ~/.gitignore
@@ -85,7 +85,7 @@ You can now start the database server using:
 $ mysql.server restart
 ```
 
-# Change to working dir and clone the source from github
+## Change to working dir and clone the source from github
 ```sh
 $ git clone git@github.com/hemelend/BV_Importer.git
 $ git fetch
@@ -103,11 +103,17 @@ $ gem install bundler
 ```sh
 $ bundle install
 ```
-# DBs creations steps
+## DBs creations steps
 Run rake task to setup database
 ```sh
 $ bundle exec rake db:setup
 ```
+
+# Challenges, and how you overcame them
+
+# Reasoning behind any design decisions
+
+# Future improvements you would make with more time
 
 [RubyOnRails]:http://rubyonrails.org
 [jQuery]:http://jquery.com
