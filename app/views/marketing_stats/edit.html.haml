@@ -1,0 +1,8 @@
+.row{style:"max-width: 300px; padding: 15px; margin: 0 auto;"}
+  = simple_form_for( @mstat, :validate => true) do |f|
+    = f.input :campaign_name
+    = f.input :impressions
+    = f.input :clicks
+    = f.input :cost
+
+    = f.submit class: 'btn btn-primary'
