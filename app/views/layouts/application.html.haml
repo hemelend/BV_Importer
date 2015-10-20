@@ -1,0 +1,163 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title BV_IMPORTER_201510
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'flexslider.css'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'jquery.flexslider'
+    = csrf_meta_tags
+  %body
+    .header
+      %header
+        .navbar.navbar-bv.navbar-fixed-top
+          .container
+            .navbar-header
+              %a.navbar-brand{:href => "/", style:' font-size:28px; font-weight:lighter;'}
+                BV_IMPORTER_201510
+              / .navbar-toggle is used as the toggle for collapsed navbar content
+              %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+            / Everything in here gets hidden at 940px or less
+            .navbar-collapse.collapse.navbar-right
+              = menu_group do
+                / = menu_item 'Discussions', 'discussions_path'
+                / = drop_down "Products" do
+                /   = menu_item "Things you can't afford", root_path #expensive_products_path
+                /   = menu_item "Things that won't suit you anyway", root_path #harem_pants_path
+                /   = menu_item "Things you're not even cool enough to buy anyway", root_path #hipster_products_path
+                / - if current_user.lives_in_hackney?
+                /   = menu_item "Bikes", root_path #fixed_wheel_bikes_path
+                / = menu_item "About Us", root_path #about_us_path
+                / = menu_item "Contact", root_path #contact_path
+                / = menu_divider
+              = form_tag('/search', method: 'get', class: 'navbar-form navbar-left') do
+                .form-group
+                  = text_field_tag(:q)
+                  / = submit_tag('Search')
+                %i.fa.fa-search
+              = menu_group pull: :right do
+                - if current_user
+                  = menu_item 'Import Marketing Stats', imported_files_path
+                  = menu_item "Logged as :#{current_user.name}", '/'
+                  = menu_item "Log Out", logout_path
+                - else
+                  = menu_item "Log In", "#modal-login", data: {toggle: 'modal'}
+                  = menu_item "Sign Up", "#modal-signup", data: {toggle: 'modal'}
+      - if params[:controller] == 'welcome' && params[:action] == 'index'
+        .flexslider{style:'margin:0px; border:0px;'}
+          %ul.slides
+            %li
+              = image_tag('homepage/depositphotos_11727136-Business-person-working-on-computer.jpg', {class:'img-responsive;', style:"width: 100%;"})
+            %li
+              = image_tag('homepage/depositphotos_20337179-stock-market-and-technology-concept.jpg', {class:'img-responsive;', style:"width: 100%;"})
+            %li
+              = image_tag('homepage/depositphotos_8165372-Businessman-drawing-a-chart.jpg', {class:'img-responsive;', style:"width: 100%;"})
+    .container-fluid{style:'padding-top: 30px;'}
+      .row
+        =bootstrap_flash
+      .row
+        = yield
+    #modal-login.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-body
+            = form_for(resource, as: resource_name, url: session_path(resource_name),  html: {class: 'form-signin'}) do |f|
+              %legend.form-signin-heading Login
+              = devise_error_messages!
+              .control-group
+                = f.label :email, class: 'sr-only'
+                = f.email_field :email, autofocus: true, required: "required", validate: { uniqueness: false }, class: 'form-control', placeholder: 'Email Address'
+              .control-group
+                = f.label :password, class: 'sr-only'
+                = f.password_field :password, autocomplete: "off", required: "required", validate: { :presence => true, :message => "Name cant be blank" }, class: 'form-control', placeholder: 'Password'
+              - if devise_mapping.rememberable?
+                .control-group
+                  = f.check_box :remember_me
+                  = f.label :remember_me
+              .form-actions
+                = f.submit "Log in", class: 'btn btn-lg btn-primary btn-block'
+              .control-group
+                = link_to "Forgot your password?", "#modal-password", data: {toggle: 'modal'}, class: 'reset_pass'
+    #modal-signup.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-body
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), :validate => true, html: {class: 'form-signin'}) do |f|
+              %legend Registration
+              = devise_error_messages!
+              .control-group
+                = f.label :first_name, class: 'control-label'
+                .controls
+                  = f.text_field :first_name, autofocus: true, class: 'form-control', :placeholder => "First Name", :required => "required"
+              .control-group
+                = f.label :last_name, class: 'control-label'
+                .controls
+                  = f.text_field :last_name, autofocus: true, class: 'form-control', :placeholder => "Last Name", :required => "required"
+              .control-group
+                = f.label :email, class: 'control-label'
+                .controls
+                  = f.email_field :email, autofocus: true, class: 'form-control', :placeholder => "Email address", :required => "required"
+              .control-group
+                = f.label :phone, class: 'control-label'
+                .controls
+                  = f.text_field :phone, autofocus: true, class: 'form-control', :placeholder => "Phone Number", :required => "required"
+              .control-group
+                = f.label :password
+                .controls
+                  = f.password_field :password, autocomplete: "off", class: 'form-control', :placeholder => "at least #{@minimum_password_length} chars", :required => "required"
+              .control-group
+                = f.label :password_confirmation
+                .controls
+                  = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', :placeholder => "Password Confirmation", :required => "required"
+              .form-actions
+                = f.submit "Sign up", class: 'btn btn-lg btn-primary btn-block'
+    #modal-password.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-body
+            = form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'form-signin'}) do |f|
+              %legend Forgot your password?
+              = devise_error_messages!
+              .control-group
+                = f.label :email, class: 'control-label'
+                .controls
+                  = f.email_field :email, autofocus: true, class: 'form-control'
+              %br/
+              .form-actions
+                = f.submit "Reset password", class: 'btn btn-lg btn-primary btn-block'
+    :javascript
+      $('.modal').on('shown.bs.modal', function() {
+        // return $(this).find('input:visible:first').focus().end().find('form').enableClientSideValidations();
+      });
+      $(window).load(function() {
+        $('.flexslider').flexslider();
+      });
+  / Footer Start
+  %footer
+    .navbar-bottom.navbar-inverse
+      .container
+        .navbar-header
+          %p
+            = "Copyright and Trademark |"
+            &copy;
+            = "#{Date.today.year} BV_Importer_201510. All rights reserved."
+        %nav{'role'=>"navigation"}
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a.c-footer__icon{:href => "https://www.facebook.com/", :target => '_blank'}
+                %i.fa.fa-facebook.fa-2x
+            %li
+              %a.c-footer__icon{:href => "http://www.google.com", :target => '_blank'}
+                %i.fa.fa-google-plus.fa-2x
+            %li
+              %a.c-footer__icon{:href => "https://twitter.com/", :target => '_blank'}
+                %i.fa.fa-twitter.fa-2x
+            %li
+              %a.c-footer__icon{:href => "https://rss.com/", :target => '_blank'}
+                %i.fa.fa-rss.fa-2x
+            %li
+  / Footer End

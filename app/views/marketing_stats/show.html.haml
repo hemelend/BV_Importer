@@ -1,0 +1,38 @@
+.row{style:"max-width: 1200px; padding: 15px; margin: 0 auto;"}
+  %h1
+    Marketing Statistics Data
+  .col-md-2
+    .tabbable.tabs-left
+      %ul.nav.nav-stacked.nav-tabs
+        %li.active{:role => "presentation"}
+          %a{:href => "#imported_files", 'data-toggle' => "tab"}
+            %i.fa.fa-user
+            Imported file <FILE>
+  .col-md-10
+    .tab-content
+      #imported_files.tab-pane.active
+        #test2
+          .row.pagination-right
+            = paginate(@mstats)
+          %table.table.table-striped
+            %thead
+              %tr
+                %th ID
+                %th Campaign Name
+                %th Impressions
+                %th Clicks
+                %th Cost
+                %th Created At
+                %th
+            %tbody
+              - @mstats.each do |stat|
+                %tr
+                  %td=stat.id
+                  %td=stat.campaign_name
+                  %td=stat.impressions
+                  %td=stat.clicks
+                  %td=stat.cost
+                  %td=stat.created_at.strftime('%b %d, %Y')
+                  %td
+                    =link_to content_tag(:i, nil, {class: 'fa fa-trash-o'}), stat, method: :delete, data: {confirm: "Are you sure you want to delete this statistic data  # #{stat.id}?"}
+          =link_to 'Back Imported Files', imported_files_path, class: 'btn btn-primary'

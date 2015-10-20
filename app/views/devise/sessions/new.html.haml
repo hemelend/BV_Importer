@@ -1,0 +1,16 @@
+= form_for(resource, as: resource_name, url: new_user_session_path, validate: true,  html: {class: 'form-signin'}) do |f|
+  %legend.form-signin-heading Login
+  = devise_error_messages!
+  .control-group
+    = f.label :email, class: 'sr-only'
+    = f.email_field :email, autofocus: true, required: "required", class: 'form-control', placeholder: 'Email Address'
+  .control-group
+    = f.label :password, class: 'sr-only'
+    = f.password_field :password, autocomplete: "off", required: "required", class: 'form-control', placeholder: 'Password'
+  - if devise_mapping.rememberable?
+    .control-group
+      = f.check_box :remember_me
+      = f.label :remember_me
+  .form-actions
+    = f.submit "Log in", class: 'btn btn-lg btn-primary btn-block'
+/ = render "devise/shared/links"

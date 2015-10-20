@@ -1,0 +1,34 @@
+.row{style:"max-width: 1200px; padding: 15px; margin: 0 auto;"}
+  %h1
+    Marketing Statistics Files
+  .col-md-2
+    .tabbable.tabs-left
+      %ul.nav.nav-stacked.nav-tabs
+        %li.active{:role => "presentation"}
+          %a{:href => "#imported_files", 'data-toggle' => "tab"}
+            %i.fa.fa-user
+            Imported files
+  .col-md-10
+    .tab-content
+      #imported_files.tab-pane.active
+        #test2
+          %table.table.table-striped
+            %thead
+              %tr
+                %th ID
+                %th Name
+                %th User
+                %th Created At
+                %th
+            %tbody
+              - @files.each do |file|
+                %tr
+                  %td=file.id
+                  %td=file.name
+                  %td=file.user.name
+                  %td=file.created_at.strftime('%b %d, %Y')
+                  %td
+                    =link_to content_tag(:i, nil, {class: 'fa fa-eye'}), show_marketing_stats_path(file.id), id: file.id
+                    &nbsp;
+                    =link_to content_tag(:i, nil, {class: 'fa fa-trash-o'}), file, method: :delete, data: {confirm: "Are you sure you want to delete this statistic file  # #{file.id} - #{file.name} ?"}
+          =link_to "Add New Marketing Stats File", new_imported_file_path, class: 'btn btn-primary'

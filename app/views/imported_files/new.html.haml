@@ -1,0 +1,5 @@
+.row{style:"max-width: 300px; padding: 15px; margin: 0 auto;"}
+  = simple_form_for( @new_file, :validate => true) do |f|
+    = f.input :user_id, :as => :hidden, :input_html => { value: current_user.id }
+    = f.input :name , :as => :file, placeholder: 'Insert variable name here'
+    = f.submit class: 'btn btn-primary'
