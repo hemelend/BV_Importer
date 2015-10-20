@@ -23,17 +23,6 @@
                 %span.icon-bar
             / Everything in here gets hidden at 940px or less
             .navbar-collapse.collapse.navbar-right
-              = menu_group do
-                / = menu_item 'Discussions', 'discussions_path'
-                / = drop_down "Products" do
-                /   = menu_item "Things you can't afford", root_path #expensive_products_path
-                /   = menu_item "Things that won't suit you anyway", root_path #harem_pants_path
-                /   = menu_item "Things you're not even cool enough to buy anyway", root_path #hipster_products_path
-                / - if current_user.lives_in_hackney?
-                /   = menu_item "Bikes", root_path #fixed_wheel_bikes_path
-                / = menu_item "About Us", root_path #about_us_path
-                / = menu_item "Contact", root_path #contact_path
-                / = menu_divider
               = form_tag('/search', method: 'get', class: 'navbar-form navbar-left') do
                 .form-group
                   = text_field_tag(:q)
@@ -56,7 +45,7 @@
               = image_tag('homepage/depositphotos_20337179-stock-market-and-technology-concept.jpg', {class:'img-responsive;', style:"width: 100%;"})
             %li
               = image_tag('homepage/depositphotos_8165372-Businessman-drawing-a-chart.jpg', {class:'img-responsive;', style:"width: 100%;"})
-    .container-fluid{style:'padding-top: 30px;'}
+    .container-fluid{style:'padding-top: 30px; min-height:660px;'}
       .row
         =bootstrap_flash
       .row
