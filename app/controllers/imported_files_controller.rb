@@ -4,7 +4,6 @@ class ImportedFilesController < ApplicationController
 
   # GET imported_files/index
   def index
-    # @mstats = MarketingStat.all
     @files = ImportedFile.all
   end
 
@@ -21,7 +20,6 @@ class ImportedFilesController < ApplicationController
       if file_extension == 'application/gzip'
         Zlib::GzipReader.open(filename) do |gzip|
           # Read into memory
-          # content = entry.get_input_stream.read
           csv = CSV.new(gzip, headers:true)
           # Create array with data
           csv.each do |row|
@@ -48,7 +46,6 @@ class ImportedFilesController < ApplicationController
               puts "#{entry.name} is a regular file!"
 
               # Read into memory
-              # content = entry.get_input_stream.read
               csv = CSV.new(entry.get_input_stream.read, headers:true)
               # Create array with data
               csv.each do |row|
