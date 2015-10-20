@@ -22,7 +22,7 @@ BeenVerified Test uses a number of open source projects to work properly:
 
 
 
-### Installation
+# Installation
 
 You need rbenv installed globally; first, if you have already installed any other ruby manager (like rvm), you must to get rid of rvm in order to install rbenv :
 
@@ -42,41 +42,41 @@ $ brew install ruby-build
 ```
 ##Configurate working directory
 
-## Global git ignore
+### Global git ignore
 ```sh
 $ git config --global core.excludesfile ~/.gitignore
 $ printf "vendor/bundle\n.DS_Store\n" >> ~/.gitignore
 ```
-## Set default bundle path
+### Set default bundle path
 ```sh
 $ mkdir -p ~/.bundle
 $ printf -- "---\nBUNDLE_PATH: vendor/bundle" >> ~/.bundle/config
 ```
-## Instantiate rbenv with your shell (choose preferred file - .profile, .bash_profile, .zshrc, etc)
+### Instantiate rbenv with your shell (choose preferred file - .profile, .bash_profile, .zshrc, etc)
 ```sh
 $ printf 'eval "$(rbenv init -)"' >> ~/.bash_profile
 ```
 ### Remove the RVM stuff from your .profile - It probably looks like...
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
-## Reload your profile if you are using .profile
+### Reload your profile if you are using .profile
 ```sh
 $ . ~/.profile
 ```
 
-## Add autocompletion to IRB
+### Add autocompletion to IRB
 ```sh
 $ touch ~/.irbrc
 $ printf "require 'irb/completion'" >> ~/.irbrc
 ```
 
-## Choose a ruby flavor version to install
+### Choose a ruby flavor version to install
 ```sh
 $ rbenv install 2.2.0
 $ rbenv rehash
 ```
 
-## Install MySQL
+### Install MySQL
 ```sh
 $ brew install mysql
 ```
@@ -85,25 +85,25 @@ You can now start the database server using:
 $ mysql.server restart
 ```
 
-## Change to working dir and clone the source from github
+### Change to working dir and clone the source from github
 ```sh
 $ git clone git@github.com/hemelend/BV_Importer.git
 $ git fetch
 $ git checkout master
 ```
-## Change to application directory
+### Change to application directory
 ```sh
 $ rbenv local 2.2.0
 ```
-## Bundle installation
+### Bundle installation
 ```sh
 $ gem install bundler
 ```
-## Installing gems bundle
+### Installing gems bundle
 ```sh
 $ bundle install
 ```
-## DBs creations steps
+### DBs creations steps
 Run rake task to setup database
 ```sh
 $ bundle exec rake db:setup
