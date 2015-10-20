@@ -85,17 +85,6 @@ You can now start the database server using:
 $ mysql.server restart
 ```
 
-# DBs creations steps
-Download and extract the file called ‘*DB_Dump_filename*.tar.gz’ into application directory
-```sh
-$ tar xvfz <DB_Dump_filename>.tar.gz
-$ cd <DB_Dump_filename>
-$ mongorestore dump
-$ sudo psql postgres
-$ CREATE DATABASE <username> WITH OWNER <username> ENCODING 'UTF8'
-$ psql comlinked_development < db_comlinked_production.sql
-```
-
 # Change to working dir and clone the source from github
 ```sh
 $ git clone git@github.com/hemelend/BV_Importer.git
@@ -114,7 +103,11 @@ $ gem install bundler
 ```sh
 $ bundle install
 ```
-
+# DBs creations steps
+Run rake task to setup database
+```sh
+$ bundle exec rake db:setup
+```
 
 [RubyOnRails]:http://rubyonrails.org
 [jQuery]:http://jquery.com
