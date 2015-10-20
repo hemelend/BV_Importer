@@ -34,8 +34,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Bootstrap responsive lib
 gem 'twitter-bootstrap-rails'
-# https://github.com/matenia/bootstrap-kaminari-views
-# gem 'bootstrap-kaminari-views'
+
 # less interpreter for less
 gem "less-rails"
 
@@ -56,6 +55,7 @@ gem 'carrierwave_direct'
 
 # pagination
 gem 'kaminari'
+# https://github.com/matenia/bootstrap-kaminari-views
 gem 'bootstrap-kaminari-views'
 
 group :development, :test do
