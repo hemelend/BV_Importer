@@ -96,7 +96,7 @@ $ CREATE DATABASE <username> WITH OWNER <username> ENCODING 'UTF8'
 $ psql comlinked_development < db_comlinked_production.sql
 ```
 
-# Change to working dir and clone the source from bitbucket
+# Change to working dir and clone the source from github
 ```sh
 $ git clone git@github.com/hemelend/BV_Importer.git
 $ git fetch
